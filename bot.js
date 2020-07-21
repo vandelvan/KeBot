@@ -18,5 +18,5 @@ client.login(process.env.BOT_TOKEN);
 
 //Bienvenida usuarios
 client.on('guildMemberAdd', member => {
-    member.guild.channels.get('735203148544606289').send(member + "pásale a lo barrido! Aquí estarás informado cuando el Kevin esté en stream y puedes encontrar amigos para jugar juntos \:kevin1Wat:"); 
+    member.guild.channels.cache.get('735203148544606289').send(member + "pásale a lo barrido! Aquí estarás informado cuando el Kevin esté en stream y puedes encontrar amigos para jugar juntos \:kevin1Wat:"); 
 });
