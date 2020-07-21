@@ -1,0 +1,19 @@
+{
+  "name": "kebot",
+  "version": "1.0.0",
+  "description": "discord bot for kevin1229",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/vandelvan/KeBot.git"
+  },
+  "author": "vandelvan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vandelvan/KeBot/issues"
+  },
+  "homepage": "https://github.com/vandelvan/KeBot#readme"
+}
