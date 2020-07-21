@@ -16,6 +16,7 @@ client.on("ready", () => {
 // Initialize bot by connecting to the server
 client.login(process.env.BOT_TOKEN);
 
-// bot.on('guildMemberAdd', member => {
-//     member.guild.channels.get('735203148544606289').send("Welcome"); 
-// });
+//Bienvenida usuarios
+bot.on('guildMemberAdd', member => {
+    member.guild.channels.get('735203148544606289').send(member + "pásale a lo barrido! Aquí estarás informado cuando el Kevin esté en stream y puedes encontrar amigos para jugar juntos \:kevin1Wat:"); 
+});
