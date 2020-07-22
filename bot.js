@@ -18,5 +18,8 @@ client.login(process.env.BOT_TOKEN);
 
 //Bienvenida usuarios
 client.on('guildMemberAdd', member => {
-    member.guild.channels.cache.get('735203148544606289').send("<@" + member + "> pásale a lo barrido! Aquí estarás informado cuando el Kevin esté en stream y puedes encontrar amigos para jugar juntos"); 
+    member.guild.channels.cache.get('735203148544606289').send("<@" + member + "> pásale a lo barrido! Aquí estarás informado cuando el Kevin esté en stream y puedes encontrar amigos para jugar juntos");
+    //Automaticamente le da el rol de "vox populi"
+    var role= member.guild.roles.cache.find(role => role.name === "Vox Populi");
+    member.roles.add(role);
 });
