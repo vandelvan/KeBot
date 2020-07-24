@@ -48,14 +48,14 @@ async function twitch_check() {
     )
     .then(console.log);
 
-  token = token.access_token;
+  token = token.data.access_token;
 
-  const helix = axios.create({
+  const helix = await axios.create({
     baseURL: "https://api.twitch.tv/helix/",
     headers: { "Client-ID": client_id, "Authirization": "Bearer " + token },
   });
 
-  const kraken = axios.create({
+  const kraken = await axios.create({
     baseURL: "https://api.twitch.tv/kraken/",
     headers: { "Client-ID": client_id },
   });
