@@ -1,5 +1,5 @@
-import { ApiClient } from 'twitch';
-import { StaticAuthProvider } from 'twitch-auth';
+const { ApiClient } = require('twitch');
+const { StaticAuthProvider } = require('twitch-auth');
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const clientId = process.env.TWITCH_CLIENT;
