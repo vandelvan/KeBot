@@ -38,8 +38,8 @@ client.on("guildMemberAdd", (member) => {
 });
 
 async function componentDidMount() {
-  let { info } = await axios
-    .get("https://api.twitch.tv/helix/streams?first=10")
+  const info  = await axios
+    .get("https://api.twitch.tv/helix/streams?game_id=33214")
     .catch((e) => console.log(e));
   console.log(info);
 }
