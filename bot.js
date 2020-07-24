@@ -36,6 +36,6 @@ client.on("guildMemberAdd", (member) => {
   member.roles.add(role).catch((e) => console.log(e));
 });
 
-api.get('streams/featured', { version: 'kraken' }).then(response => {
+api.get('streams?game_id=33214', { version: 'kraken' }).then(response => {
   console.log(response);
 });
