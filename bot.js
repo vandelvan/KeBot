@@ -4,18 +4,13 @@ const axios = require("axios");
 const client_id = process.env.TWITCH_CLIENT;
 const secret = process.env.TWITCH_SECRET;
 
-async function getToken() {
-  const token = await axios.post(
-    "https://id.twitch.tv/oauth2/token?client_id=" +
-      client_id +
-      "&client_secret=" +
-      secret +
-      "&grant_type=client_credentials"
-  );
-  return token;
-}
-
-console.log(getToken());
+axios.post(
+  "https://id.twitch.tv/oauth2/token?client_id=" +
+    client_id +
+    "&client_secret=" +
+    secret +
+    "&grant_type=client_credentials"
+).then(console.log);
 const helix = axios.create({
   baseURL: "https://api.twitch.tv/helix/",
   headers: { "Client-ID": client_id, Authirization: "Bearer" },
