@@ -1,5 +1,14 @@
+import { ApiClient } from 'twitch';
+import { StaticAuthProvider } from 'twitch-auth';
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const clientId = process.env.TWITCH_CLIENT;
+const accessToken = process.env.TWITCH_TOKEN;
+const authProvider = new StaticAuthProvider(clientId, accessToken);
+const apiClient = new ApiClient({ authProvider });
+
+// Initialize bot by connecting to the server
+client.login(process.env.BOT_TOKEN);
 
 // Event listener when a user connected to the server.
 client.on("ready", () => {
@@ -11,10 +20,8 @@ client.on("ready", () => {
     .then(console.log)
     .catch(console.error);
   console.log(`Logged in as ${client.user.tag}!`);
+  console.log(isStreamLive());
 });
-
-// Initialize bot by connecting to the server
-client.login(process.env.BOT_TOKEN);
 
 //Bienvenida usuarios
 client.on("guildMemberAdd", (member) => {
@@ -32,3 +39,12 @@ client.on("guildMemberAdd", (member) => {
   );
   member.roles.add(role).catch((e) => console.log(e));
 });
+
+//Checamos si kevin esta live
+async function isStreamLive() {
+	const user = await apiClient.helix.users.getUserByName("kevin1229");
+	if (!user) {
+		return false;
+	}
+	return await apiClient.helix.streams.getStreamByUserId(user.id) !== null;
+}
