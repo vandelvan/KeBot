@@ -4,19 +4,21 @@ const axios = require("axios");
 const client_id = process.env.TWITCH_CLIENT;
 
 const helix = axios.create({
-  baseURL: 'https://api.twitch.tv/helix/',
-  headers: {'Client-ID': client_id}
+  baseURL: "https://api.twitch.tv/helix/",
+  headers: { "Client-ID": client_id },
 });
 
 const kraken = axios.create({
-  baseURL: 'https://api.twitch.tv/kraken/',
-  headers: {'Client-ID': client_id}
+  baseURL: "https://api.twitch.tv/kraken/",
+  headers: { "Client-ID": client_id },
 });
 
-
-helix.get('channels?broadcaster_id=44445592').then(function (response) {
-	console.log(response);
-});
+helix
+  .get("channels?broadcaster_id=44445592")
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch((e) => console.log(e));
 
 // Initialize bot by connecting to the server
 client.login(process.env.BOT_TOKEN);
@@ -31,7 +33,6 @@ client.on("ready", () => {
     .then(console.log)
     .catch(console.error);
   console.log(`Logged in as ${client.user.tag}!`);
-  componentDidMount();
 });
 
 //Bienvenida usuarios
