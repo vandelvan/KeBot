@@ -1,6 +1,6 @@
 {
   "name": "kebot",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "discord bot for kevin1229",
   "main": "bot.js",
   "scripts": {
@@ -20,5 +20,6 @@
     "discord.js": "12.0.2",
     "request": "2.88.02",
     "twitch" : "4.1.3"
-  }
+  },
+  "type": "module"
 }
