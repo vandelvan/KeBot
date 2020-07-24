@@ -3,31 +3,6 @@ const client = new Discord.Client();
 const axios = require("axios");
 const client_id = process.env.TWITCH_CLIENT;
 const secret = process.env.TWITCH_SECRET;
-var token = "";
-axios.post(
-  "https://id.twitch.tv/oauth2/token?client_id=" +
-    client_id +
-    "&client_secret=" +
-    secret +
-    "&grant_type=client_credentials"
-).then(t => token = t.access_token);
-console.log(token);
-const helix = axios.create({
-  baseURL: "https://api.twitch.tv/helix/",
-  headers: { "Client-ID": client_id, Authirization: "Bearer "+token },
-});
-
-const kraken = axios.create({
-  baseURL: "https://api.twitch.tv/kraken/",
-  headers: { "Client-ID": client_id },
-});
-
-// helix
-//   .get("channels?broadcaster_id=44445592")
-//   .then(function (response) {
-//     console.log(response);
-//   })
-//   .catch((e) => console.log(e));
 
 // Initialize bot by connecting to the server
 client.login(process.env.BOT_TOKEN);
@@ -42,6 +17,7 @@ client.on("ready", () => {
     .then(console.log)
     .catch(console.error);
   console.log(`Logged in as ${client.user.tag}!`);
+  twitch_check().then(console.log);
 });
 
 //Bienvenida usuarios
@@ -60,3 +36,34 @@ client.on("guildMemberAdd", (member) => {
   );
   member.roles.add(role).catch((e) => console.log(e));
 });
+
+async function twitch_check() {
+  var token = await axios
+    .post(
+      "https://id.twitch.tv/oauth2/token?client_id=" +
+        client_id +
+        "&client_secret=" +
+        secret +
+        "&grant_type=client_credentials"
+    )
+    .then(console.log);
+
+  token = token.access_token;
+
+  const helix = axios.create({
+    baseURL: "https://api.twitch.tv/helix/",
+    headers: { "Client-ID": client_id, "Authirization": "Bearer " + token },
+  });
+
+  const kraken = axios.create({
+    baseURL: "https://api.twitch.tv/kraken/",
+    headers: { "Client-ID": client_id },
+  });
+
+  return await helix
+    .get("channels?broadcaster_id=44445592")
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch((e) => console.log(e));
+}
