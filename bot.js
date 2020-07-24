@@ -12,8 +12,8 @@ async function getToken() {
       secret +
       "&grant_type=client_credentials"
   );
+  console.log(token);
 }
-console.log(getToken());
 const helix = axios.create({
   baseURL: "https://api.twitch.tv/helix/",
   headers: { "Client-ID": client_id, Authirization: "Bearer" },
