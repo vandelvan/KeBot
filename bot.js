@@ -3,17 +3,18 @@ const client = new Discord.Client();
 const axios = require("axios");
 const client_id = process.env.TWITCH_CLIENT;
 const secret = process.env.TWITCH_SECRET;
-
+var token = "";
 axios.post(
   "https://id.twitch.tv/oauth2/token?client_id=" +
     client_id +
     "&client_secret=" +
     secret +
     "&grant_type=client_credentials"
-).then(console.log);
+).then(t => token = t.access_token);
+console.log(token);
 const helix = axios.create({
   baseURL: "https://api.twitch.tv/helix/",
-  headers: { "Client-ID": client_id, Authirization: "Bearer" },
+  headers: { "Client-ID": client_id, Authirization: "Bearer "+token },
 });
 
 const kraken = axios.create({
