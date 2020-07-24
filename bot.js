@@ -1,8 +1,22 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const axios = require("axios");
+const client_id = process.env.TWITCH_CLIENT;
 
-axios.defaults.headers.common["Client-ID"] = process.env.TWITCH_CLIENT;
+const helix = axios.create({
+  baseURL: 'https://api.twitch.tv/helix/',
+  headers: {'Client-ID': client_id}
+});
+
+const kraken = axios.create({
+  baseURL: 'https://api.twitch.tv/kraken/',
+  headers: {'Client-ID': client_id}
+});
+
+
+helix.get('channels?broadcaster_id=44445592').then(function (response) {
+	console.log(response);
+});
 
 // Initialize bot by connecting to the server
 client.login(process.env.BOT_TOKEN);
@@ -36,10 +50,3 @@ client.on("guildMemberAdd", (member) => {
   );
   member.roles.add(role).catch((e) => console.log(e));
 });
-
-async function componentDidMount() {
-  const info  = await axios
-    .get("https://api.twitch.tv/helix/streams?game_id=33214")
-    .catch((e) => console.log(e));
-  console.log(info);
-}
