@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const TwitchJs = require('twitch-js').default;
-const token = process.env.TWITCH_CLIENT;
-const { api } = new TwitchJs({ token });
+const axios = require('axios');
+
+axios.defaults.headers.common['Client-ID'] = process.env.TWITCH_CLIENT;
 
 // Initialize bot by connecting to the server
 client.login(process.env.BOT_TOKEN);
@@ -17,6 +17,7 @@ client.on("ready", () => {
     .then(console.log)
     .catch(console.error);
   console.log(`Logged in as ${client.user.tag}!`);
+  componentDidMount();
 });
 
 //Bienvenida usuarios
@@ -36,6 +37,7 @@ client.on("guildMemberAdd", (member) => {
   member.roles.add(role).catch((e) => console.log(e));
 });
 
-api.get('streams?game_id=33214', { version: 'kraken' }).then(response => {
-  console.log(response);
-});
+async function componentDidMount(){
+  let {info} = await axios.get('https://api.twitch.tv/helix/streams?first=10')
+  console.log(info)
+  }
