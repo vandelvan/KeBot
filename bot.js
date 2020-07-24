@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const TwitchJs = require('twitch-js');
+const TwitchJs = require('twitch-js').default;
 const token = process.env.TWITCH_TOKEN;
 const { api } = new TwitchJs({ token });
 
