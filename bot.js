@@ -46,9 +46,7 @@ async function twitch_check() {
         secret +
         "&grant_type=client_credentials"
     )
-    .then(console.log);
-
-  token = token.data.access_token;
+    .then(t => token = t.access_token);
 
   const helix = await axios.create({
     baseURL: "https://api.twitch.tv/helix/",
