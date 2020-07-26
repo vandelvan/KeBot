@@ -17,7 +17,6 @@ client.on("ready", () => {
     .then(console.log)
     .catch(console.error);
   console.log(`Logged in as ${client.user.tag}!`);
-  tracker.start();
 });
 
 //Bienvenida usuarios

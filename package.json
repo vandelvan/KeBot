@@ -18,7 +18,6 @@
   "homepage": "https://github.com/vandelvan/KeBot#readme",
   "dependencies": {
     "discord.js": "12.0.2",
-    "node-twitch": "^0.1.5",
     "request": "2.88.02"
   }
 }
