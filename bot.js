@@ -93,7 +93,7 @@ TwitchMonitor.onChannelLiveUpdate((streamData) => {
   // Sending a new message
   if (!isLive) {
     // We do not post "new" notifications for channels going/being offline
-    continue;
+    return false;
   }
   const msgEmbed = LiveEmbed.createForStream(streamData);
   client.channels.cache
