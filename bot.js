@@ -48,8 +48,6 @@ class StreamActivity {
    */
   static setChannelOnline(stream) {
     this.onlineChannels[stream.user_name] = stream;
-
-    this.updateActivity();
   }
 
   /**
@@ -57,8 +55,6 @@ class StreamActivity {
    */
   static setChannelOffline(stream) {
     delete this.onlineChannels[stream.user_name];
-
-    this.updateActivity();
   }
 
   /**
@@ -77,13 +73,6 @@ class StreamActivity {
   static init(discordClient) {
     this.discordClient = discordClient;
     this.onlineChannels = {};
-
-    this.updateActivity();
-
-    // Continue to update current stream activity every 5 minutes or so
-    // We need to do this b/c Discord sometimes refuses to update for some reason
-    // ...maybe this will help, hopefully
-    setInterval(this.updateActivity.bind(this), 5 * 60 * 1000);
   }
 }
 
