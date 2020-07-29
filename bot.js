@@ -2,6 +2,9 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const TwitchMonitor = require("./twitchStuff/twitch-monitor");
 const LiveEmbed = require("./twitchStuff/live-embed");
+const MongoClient = require("mongodb").MongoClient;
+const uri = process.env.MONGODB_URI;
+const clientDB = new MongoClient(uri, { poolSize: 10, useNewUrlParser: true });
 
 // Initialize bot by connecting to the server
 client.login(process.env.BOT_TOKEN);
@@ -84,17 +87,37 @@ TwitchMonitor.onChannelLiveUpdate((streamData) => {
     // We do not post "new" notifications for channels going/being offline
     return false;
   }
-  const msgEmbed = LiveEmbed.createForStream(streamData);
-  client.channels.cache
-    .get("735201896779743353")
-    .send(
-      "@everyone El Kevin ya está stremeando `" +
-        streamData.title +
-        "`, Caile a verlo! https://twitch.tv/kevin1229",
-      {
-        embed: msgEmbed,
+  clientDB.connect((err) => {
+    if (err) throw err;
+    const collection = clientDB
+      .dbclientD("heroku_pknlh6w2")
+      .collection("kebot");
+    console.log("conectado a la DB");
+    collection.find({}).toArray(function (err, docs) {
+      if (err) throw err;
+      if (docs[0].streamDate != streamData.started_at) {
+        collection.updateOne(
+          {},
+          { $set: { streamDate: streamData.started_at } },
+          function (err, result) {
+            if (err) throw err;
+            const msgEmbed = LiveEmbed.createForStream(streamData);
+            client.channels.cache
+              .get("735201896779743353")
+              .send(
+                "@everyone El Kevin ya está stremeando `" +
+                  streamData.title +
+                  "`, Caile a verlo! https://twitch.tv/kevin1229",
+                {
+                  embed: msgEmbed,
+                }
+              )
+              .catch((e) => console.log(e));
+          }
+        );
       }
-    )
-    .catch((e) => console.log(e));
+    });
+  });
+  clientDB.close();
   return true;
 });
