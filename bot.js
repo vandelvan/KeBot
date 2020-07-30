@@ -90,7 +90,7 @@ TwitchMonitor.onChannelLiveUpdate((streamData) => {
   clientDB.connect((err) => {
     if (err) throw err;
     const collection = clientDB
-      .dbclientD("heroku_pknlh6w2")
+      .db("heroku_pknlh6w2")
       .collection("kebot");
     console.log("conectado a la DB");
     collection.find({}).toArray(function (err, docs) {
