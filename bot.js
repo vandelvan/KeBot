@@ -26,6 +26,27 @@ client.on("ready", () => {
   TwitchMonitor.start();
 });
 
+//Comandos
+client.on("message", async (msg) => {
+  if (msg.content.toLowerCase().includes("!chuy"))
+  {
+    msg.reply("Chinga a tu madre Chuy 🖕😡");
+  }
+  else if(msg.content.toLowerCase().includes("!toribio"))
+  {
+    msg.reply("Tú también chinga a tu madre Toribio 🖕😡");
+  }
+  else if(msg.content.toLowerCase().includes("!gope"))
+  {
+    msg.reply("Esta va para el Chuy 🖕😡");
+  }
+  else if(msg.content.toLowerCase().includes("!torichuy"))
+  {
+    msg.reply("Chinguen a su madre los dos 🖕😡🖕😡");
+  }
+
+});
+
 //Bienvenida usuarios
 client.on("guildMemberAdd", (member) => {
   member.guild.channels.cache
