@@ -48,6 +48,10 @@ client.on("message", async (msg) => {
   {
     msg.reply("Funado por decir pendejadas 🤬😤");
   }
+  else if(msg.content.toLowerCase().includes("!kevin"))
+  {
+    msg.reply("Todo menso el bato 🥴");
+  }
 
 });
 
