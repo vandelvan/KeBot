@@ -44,7 +44,7 @@ client.on("message", async (msg) => {
   {
     msg.reply("Chinguen a su madre los dos 🖕😡🖕😡");
   }
-  else if(msg.content.toLowerCase().includes("!torichuy"))
+  else if(msg.content.toLowerCase().includes("!ruben"))
   {
     msg.reply("Funado por decir pendejadas 🤬😤");
   }
